@@ -18,12 +18,16 @@ No final essa api devera realizar o cadastro de usuarios e autenticação. Deve 
 ### Como executar ?
 
 Realize um clone do projeto, ou baixe o arquivo .zip...
+Sete seu banco de dados no arquivo .env na pasta do prisma (estou usando o sqlite).
 
 > Instale as dependencias
 ```
 yarn install
 ```
-
+> Rode as migracoes no banco
+```
+npx prisma migrate up --experimental
+```
 > Apos rode o servidor em modo de desenvolvimento
 ```
 yarn run dev
