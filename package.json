@@ -1,0 +1,20 @@
+{
+  "name": "behind_the_masks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.0.0-beta.3",
+    "@types/node": "^13.13.2",
+    "ts-node": "^8.9.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.0.0-beta.3",
+    "graphql-yoga": "^1.18.3"
+  }
+}
