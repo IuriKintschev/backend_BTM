@@ -6,7 +6,7 @@ O intuito deste projeto backend, e testar as novas features do prisma2 em conjun
 
 ## Overview
 
-No final essa api devera realizar o cadastro de ususarios e autenticação. Deve realizar postagens e seguir outros usuarios para receber os posts no Feed. Deve ser possivel tabem procurar por postagens e usuarios.
+No final essa api devera realizar o cadastro de usuarios e autenticação. Deve realizar postagens e seguir outros usuarios para receber os posts no Feed. Deve ser possivel tabem procurar por postagens e usuarios.
 
 ## Tecnologias atuais
 
