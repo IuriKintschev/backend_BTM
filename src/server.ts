@@ -1,25 +1,14 @@
 import { GraphQLServer } from 'graphql-yoga';
+import { schema } from "./schema";
+import { createContext as context } from "./context";
 
-const port = 4000;
-
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-  }
-`
-interface Hello {
-    name?: String
-}
-
-const resolvers = {
-    Query: {
-        hello: (_: any, { name }: Hello) => `Hello ${name || 'World'}`,
-    },
-}
+// porta do servidor
+const port = 5001;
 
 new GraphQLServer({
-    typeDefs,
-    resolvers
+    // @ts-ignore
+    schema,
+    context
 }).start({ port },
-    () => console.log(`🚀 Server ready at: http://localhost:${port} ⭐️`)
+    () => console.log(`🚀 Server ready at: http://localhost:${port}`)
 );

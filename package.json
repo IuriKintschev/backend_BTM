@@ -6,15 +6,23 @@
   "scripts": {
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server"
   },
-  "devDependencies": {
-    "@prisma/cli": "^2.0.0-beta.3",
-    "@types/node": "^13.13.2",
-    "ts-node": "^8.9.0",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.8.3"
-  },
   "dependencies": {
-    "@prisma/client": "^2.0.0-beta.3",
-    "graphql-yoga": "^1.18.3"
+    "@prisma/client": "2.0.0-beta.3",
+    "bcryptjs": "2.4.3",
+    "graphql": "15.0.0",
+    "graphql-shield": "7.2.6",
+    "graphql-yoga": "1.18.3",
+    "jsonwebtoken": "8.5.1",
+    "nexus": "0.12.0",
+    "nexus-prisma": "0.12.0",
+    "@nexus/schema": "0.13.1"
+  },
+  "devDependencies": {
+    "@prisma/cli": "2.0.0-beta.3",
+    "@types/node": "13.13.2",
+    "@types/ws": "7.2.4",
+    "ts-node": "8.9.0",
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.8.3"
   }
 }
