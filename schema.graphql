@@ -2,6 +2,12 @@
 ### Do not make changes to this file directly
 
 
+"""Payload de autenticação"""
+type AuthType {
+  token: String!
+  user: User!
+}
+
 scalar DateTime
 
 """Forma de efetuar um foolow em outro usuario"""
@@ -11,24 +17,41 @@ type Follow {
   id: Int!
 }
 
-input FollowCreateManyWithoutCurrentInput {
-  connect: [FollowWhereUniqueInput!]
-  create: [FollowCreateWithoutCurrentInput!]
-}
-
-input FollowCreateWithoutCurrentInput {
-  followId: Int!
-}
-
 input FollowWhereUniqueInput {
   id: Int
 }
 
 type Mutation {
-  creatPost(authorId: Int, content: String, title: String!): Post!
-  deleteOnePost(where: PostWhereUniqueInput!): Post
-  followin(currentUserId: Int!, userFollowin: Int!): Follow!
-  singupUser(data: UserCreateInput!): User!
+  """Criando um novo post"""
+  creatPost(content: String, title: String!): Post!
+  deletePost(where: PostWhereUniqueInput!): Post
+
+  """Função para seguir um usuario"""
+  followin(
+    """Id do ususario a ser seguido!"""
+    userFollowin: Int!
+  ): Follow!
+
+  """Athenticação no sistema, funcao que devolve um JWT"""
+  login(
+    """O email nao pode ser nullo"""
+    email: String!
+
+    """A senha nao pode ser nullo"""
+    password: String!
+  ): AuthType!
+
+  """Criando ususario, encryptando senha e retornando um JWT"""
+  signupUser(
+    """O email nao pode ser nullo"""
+    email: String!
+
+    """O nome nao pode ser nullo"""
+    name: String!
+
+    """A senha nao pode ser nullo"""
+    password: String!
+  ): AuthType!
   unFollow(where: FollowWhereUniqueInput!): Follow
 }
 
@@ -41,18 +64,6 @@ type Post {
   title: String!
 }
 
-input PostCreateManyWithoutAuthorInput {
-  connect: [PostWhereUniqueInput!]
-  create: [PostCreateWithoutAuthorInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  content: String
-  createdAt: DateTime
-  title: String!
-  updatedAt: DateTime
-}
-
 input PostWhereUniqueInput {
   id: Int
 }
@@ -60,16 +71,16 @@ input PostWhereUniqueInput {
 """Consultas a API"""
 type Query {
   """Recuperando os posts que foram publicados"""
-  Feed(currentUserId: Int!): [Post!]!
+  Feed: [Post!]!
 
   """Recuperando os meus posts para ser ezibidos no profile"""
-  FeedProfile(currentUserId: Int!): [Post!]!
+  FeedProfile: [Post!]!
 
-  """Procurando posts por label ou content"""
+  """Procurando posts por titulo ou conteudo"""
   filterPosts(searchPost: String): [Post!]!
 
   """Trazendo todos os follows de um usuario"""
-  Followers(currentUserId: Int!): [User!]!
+  Followers: [User!]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int): [User!]!
@@ -82,14 +93,6 @@ type User {
   id: Int!
   name: String
   posts: [Post!]!
-}
-
-input UserCreateInput {
-  email: String!
-  follows: FollowCreateManyWithoutCurrentInput
-  name: String
-  password: String
-  posts: PostCreateManyWithoutAuthorInput
 }
 
 input UserWhereUniqueInput {

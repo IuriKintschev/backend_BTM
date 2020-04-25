@@ -10,7 +10,9 @@ const prisma = new PrismaClient();
 // interface do contexto
 export interface Context {
     prisma: PrismaClient
-    request: any
+    request: {
+        get(head: string): string 
+    }
 }
 
 // exportando o contexto 
