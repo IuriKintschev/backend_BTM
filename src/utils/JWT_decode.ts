@@ -1,10 +1,10 @@
 import { verify } from "jsonwebtoken";
 import { Context } from "../context";
 
-export const SECRET = 'bolinho21'; // referencias kkjkjk
+export const SECRET = 'bolinho21'; // referencias rs
 
 /**
- * Representado o conteudo do touken
+ * Representado o conteudo do token
  */
 interface Token {
     userId: string
