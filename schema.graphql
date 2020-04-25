@@ -2,6 +2,97 @@
 ### Do not make changes to this file directly
 
 
+scalar DateTime
+
+"""Forma de efetuar um foolow em outro usuario"""
+type Follow {
+  current: User
+  followId: Int!
+  id: Int!
+}
+
+input FollowCreateManyWithoutCurrentInput {
+  connect: [FollowWhereUniqueInput!]
+  create: [FollowCreateWithoutCurrentInput!]
+}
+
+input FollowCreateWithoutCurrentInput {
+  followId: Int!
+}
+
+input FollowWhereUniqueInput {
+  id: Int
+}
+
+type Mutation {
+  creatPost(authorId: Int, content: String, title: String!): Post!
+  deleteOnePost(where: PostWhereUniqueInput!): Post
+  followin(currentUserId: Int!, userFollowin: Int!): Follow!
+  singupUser(data: UserCreateInput!): User!
+  unFollow(where: FollowWhereUniqueInput!): Follow
+}
+
+"""Posts dos usuarios"""
+type Post {
+  author: User
+  content: String
+  createdAt: DateTime!
+  id: Int!
+  title: String!
+}
+
+input PostCreateManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  create: [PostCreateWithoutAuthorInput!]
+}
+
+input PostCreateWithoutAuthorInput {
+  content: String
+  createdAt: DateTime
+  title: String!
+  updatedAt: DateTime
+}
+
+input PostWhereUniqueInput {
+  id: Int
+}
+
+"""Consultas a API"""
 type Query {
-  ok: Boolean!
+  """Recuperando os posts que foram publicados"""
+  Feed(currentUserId: Int!): [Post!]!
+
+  """Recuperando os meus posts para ser ezibidos no profile"""
+  FeedProfile(currentUserId: Int!): [Post!]!
+
+  """Procurando posts por label ou content"""
+  filterPosts(searchPost: String): [Post!]!
+
+  """Trazendo todos os follows de um usuario"""
+  Followers(currentUserId: Int!): [User!]!
+  post(where: PostWhereUniqueInput!): Post
+  user(where: UserWhereUniqueInput!): User
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int): [User!]!
+}
+
+"""Usuario que possue os posts"""
+type User {
+  email: String!
+  follows: [Follow!]!
+  id: Int!
+  name: String
+  posts: [Post!]!
+}
+
+input UserCreateInput {
+  email: String!
+  follows: FollowCreateManyWithoutCurrentInput
+  name: String
+  password: String
+  posts: PostCreateManyWithoutAuthorInput
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
 }
